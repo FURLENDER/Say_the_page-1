@@ -26,6 +26,6 @@ workflows:
           gradle wrapper --gradle-version 9.3.1
       - name: Build Android APK
         script: |
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug -Pandroid.modules.optional.split=false --no-build-cache
     artifacts:
       - app/build/outputs/apk/**/*.apk
