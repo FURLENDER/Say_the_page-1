@@ -1,0 +1,6 @@
+{
+  "name": "Счётчик и Голос",
+  "description": "Приложение для подсчета страниц и молитвенной подготовки с голосовым озвучиванием на русском языке.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
