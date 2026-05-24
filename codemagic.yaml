@@ -13,19 +13,16 @@ workflows:
       - name: Set up local.properties
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
-      - name: Extract Keystore File
+      - name: Generate Fresh Debug Keystore
         script: |
-          if [ -f debug.keystore.base64 ]; then
-            base64 -d debug.keystore.base64 > debug.keystore
-            echo "Keystore successfully extracted."
-          else
-            echo "Base64 keystore file not found."
-          fi
+          keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          echo "New compatible keystore generated successfully."
       - name: Upgrade Gradle Version
         script: |
           gradle wrapper --gradle-version 9.3.1
       - name: Build Android APK
         script: |
-          ./gradlew assembleDebug -Pandroid.modules.optional.split=false --no-build-cache
+          ./gradlew assembleDebug --no-build-cache
     artifacts:
       - app/build/outputs/apk/**/*.apk
+      
